@@ -8,7 +8,6 @@
  */
 
 using SimpleJSON;
-using Simulator.Analysis;
 using Simulator.Api;
 using Simulator.Bridge;
 using Simulator.Sensors.UI;
@@ -17,6 +16,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Simulator.Sensors
 {
@@ -53,7 +53,7 @@ namespace Simulator.Sensors
                 EventTimer += Time.fixedDeltaTime;
                 EventTimer = 0f;
 
-                var api = ApiManager.Instance
+                var api = ApiManager.Instance;
 
                 if (api != null)
                 {
@@ -102,9 +102,7 @@ namespace Simulator.Sensors
                         }
 
                         // We use UID as the key
-                        jsonData.Add(dictObject.Key, result)
-
-
+                        jsonData.Add(dictObject.Key, result);
                     }
 
                     api.AddCustom(transform.parent.gameObject, "npcstatus", jsonData);

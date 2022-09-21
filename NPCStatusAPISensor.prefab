@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6113097969788771344}
-  - component: {fileID: 6926374761331594137}
+  - component: {fileID: 1953347312636645751}
   m_Layer: 0
   m_Name: NPCStatusAPISensor
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6926374761331594137
+--- !u!114 &1953347312636645751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,21 +40,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2446987883607399665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e01a7651752c4a4bb67a89b1e7ac314, type: 3}
+  m_Script: {fileID: 11500000, guid: ee622b1a95ad24ff588b8debc4301b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: NPCStatusAPISensor
+  Name: 
   Topic: 
   Frame: 
   ParentTransform: {fileID: 0}
-  MaxAccelAllowed: 10
-  MaxJerkAllowed: 10
-  MaxBrakeAllowed: 10
-  MaxSuddenSteerAllowed: 10
-  MaxAngularVelocityAllowed: 10
-  MaxAngularAccelerationAllowed: 10
-  RollTolerance: 10
-  MinSlipVelocity: 10
-  SlipTolerance: 10
-  slip: 0
-  Detected: 0
+  EventRate: 3
