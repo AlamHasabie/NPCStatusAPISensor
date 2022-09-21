@@ -39,7 +39,11 @@ namespace Simulator.Sensors
 
         public override void OnBridgeSetup(BridgeInstance bridge)
         {
-
+            //
+        }
+        public override Type GetDataBridgePlugin()
+        {
+            return typeof(NPCStatusAPISensor);
         }
 
         public void FixedUpdate()
@@ -47,10 +51,10 @@ namespace Simulator.Sensors
             if (Time.timeScale == 0f)
                 return;
 
+            IncreaseTime();
+
             if (EventTimer > EventRate)
             {
-                // Update time
-                EventTimer += Time.fixedDeltaTime;
                 EventTimer = 0f;
 
                 var api = ApiManager.Instance;
@@ -108,6 +112,10 @@ namespace Simulator.Sensors
                     api.AddCustom(transform.parent.gameObject, "npcstatus", jsonData);
                 }
             }
+        }
+
+        public void IncreaseTime(){
+            EventTimer += Time.fixedDeltaTime;
         }
 
 
