@@ -69,33 +69,33 @@ namespace Simulator.Sensors
                     jsonData.Add("Junk", "OK !");
                     foreach(KeyValuePair<string, GameObject> dictObject in api.Agents) 
                     {
-                    //     var result = new JSONObject();
-                    //     var obj = dictObject.Value;
-                    //     var ped  = obj.GetComponent<PedestrianController>();
+                        var result = new JSONObject();
+                        var obj = dictObject.Value;
+                        var ped  = obj.GetComponent<PedestrianController>();
 
-                    //     // If it's not a pedestrian
-                    //     if (ped == null)
-                    //     {
-                    //         var tr = obj.transform;
-                    //         var rb = obj.GetComponent<Rigidbody>();
+                        // If it's not a pedestrian
+                        if (ped == null)
+                        {
+                            var tr = obj.transform;
+                            var rb = obj.GetComponent<Rigidbody>();
 
-                    //         var transform = new JSONObject();
-                    //         transform.Add("position", tr.position);
-                    //         transform.Add("rotation", tr.rotation.eulerAngles);
+                            var transform = new JSONObject();
+                            transform.Add("position", tr.position);
+                            transform.Add("rotation", tr.rotation.eulerAngles);
 
-                    //         result.Add("transform", transform);
-                    //         var npc = obj.GetComponent<NPCController>();
-                    //         if (npc != null)
-                    //         {
-                    //             result.Add("velocity", npc.GetVelocity());
-                    //             result.Add("angular_velocity", npc.GetAngularVelocity());
-                    //         }
-                    //         else
-                    //         {
-                    //         result.Add("velocity", rb.velocity);
-                    //         result.Add("angular_velocity", rb.angularVelocity);
-                    //         }
-                    //     }
+                            result.Add("transform", transform);
+                            var npc = obj.GetComponent<NPCController>();
+                            if (npc != null)
+                            {
+                                result.Add("velocity", npc.GetVelocity());
+                                result.Add("angular_velocity", npc.GetAngularVelocity());
+                            }
+                            else
+                            {
+                            result.Add("velocity", rb.velocity);
+                            result.Add("angular_velocity", rb.angularVelocity);
+                            }
+                        }
                     //     else 
                     //     {
                     //         var agent = ped.GetComponent<NavMeshAgent>();
