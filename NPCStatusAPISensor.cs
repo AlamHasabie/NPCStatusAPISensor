@@ -28,7 +28,7 @@ namespace Simulator.Sensors
         private IAgentController Controller;
 
         [SensorParameter]
-        public float EventRate = 3f;
+        public float EventRate = 0.1f;
         private float EventTimer = 0f;
 
         protected override void Initialize()
@@ -67,8 +67,8 @@ namespace Simulator.Sensors
                 {
                     var jsonData = new JSONObject();
                     jsonData.Add("Junk", "OK !");
-                    // foreach(KeyValuePair<string, GameObject> dictObject in api.Agents) 
-                    // {
+                    foreach(KeyValuePair<string, GameObject> dictObject in api.Agents) 
+                    {
                     //     var result = new JSONObject();
                     //     var obj = dictObject.Value;
                     //     var ped  = obj.GetComponent<PedestrianController>();
@@ -112,7 +112,7 @@ namespace Simulator.Sensors
 
                     //     // We use UID as the key
                     //     jsonData.Add(dictObject.Key, result);
-                    // }
+                    }
 
                     api.AddCustom(transform.parent.gameObject, "npcstatus", jsonData);
                 }
