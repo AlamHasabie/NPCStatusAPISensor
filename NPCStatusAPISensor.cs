@@ -20,11 +20,12 @@ using UnityEngine.AI;
 
 namespace Simulator.Sensors
 {
-    [SensorType("NPCStatus", new System.Type[] { typeof(NPCStatusAPIData) })]
+    [SensorType("NPCStatusAPI", new System.Type[] { typeof(NPCStatusAPIData) })]
     public class NPCStatusAPISensor : SensorBase
     {
         [SensorParameter]
-        public float EventRate = 3f;
+        public float EventRate = 0.1f;
+
         private float EventTimer = 0f;
 
         protected override void Initialize()
@@ -51,14 +52,13 @@ namespace Simulator.Sensors
             if (Time.timeScale == 0f)
                 return;
 
-            IncreaseTime();
+            EventTimer += Time.fixedDeltaTime;
 
             if (EventTimer > EventRate)
             {
                 EventTimer = 0f;
 
                 var api = ApiManager.Instance;
-
                 if (api != null)
                 {
                     var jsonData = new JSONObject();
@@ -105,19 +105,14 @@ namespace Simulator.Sensors
                             result.Add("angular_velocity", Vector3.zero);
                         }
 
-                        // We use UID as the key
+                        // We use UID as the key -> result
                         jsonData.Add(dictObject.Key, result);
                     }
-
+                    
                     api.AddCustom(transform.parent.gameObject, "npcstatus", jsonData);
                 }
             }
         }
-
-        public void IncreaseTime(){
-            EventTimer += Time.fixedDeltaTime;
-        }
-
 
         public override void OnVisualize(Visualizer visualizer)
         {

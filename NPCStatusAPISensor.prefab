@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6113097969788771344}
-  - component: {fileID: 1953347312636645751}
+  - component: {fileID: -9183758664391171706}
   m_Layer: 0
   m_Name: NPCStatusAPISensor
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1953347312636645751
+--- !u!114 &-9183758664391171706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee622b1a95ad24ff588b8debc4301b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: NPCStatusAPI
   Topic: 
   Frame: 
   ParentTransform: {fileID: 0}
-  EventRate: 3
+  EventRate: 0.1
