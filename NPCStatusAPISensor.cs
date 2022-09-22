@@ -20,15 +20,12 @@ using UnityEngine.AI;
 
 namespace Simulator.Sensors
 {
-    [SensorType("NPCStatus", new System.Type[] { typeof(NPCStatusAPIData) })]
+    [SensorType("NPCStatusAPI", new System.Type[] { typeof(NPCStatusAPIData) })]
     public class NPCStatusAPISensor : SensorBase
     {
-
-        private BridgeInstance Bridge;
-        private IAgentController Controller;
-
         [SensorParameter]
         public float EventRate = 0.1f;
+
         private float EventTimer = 0f;
 
         protected override void Initialize()
@@ -55,18 +52,16 @@ namespace Simulator.Sensors
             if (Time.timeScale == 0f)
                 return;
 
-            IncreaseTime();
+            EventTimer += Time.fixedDeltaTime;
 
             if (EventTimer > EventRate)
             {
                 EventTimer = 0f;
 
                 var api = ApiManager.Instance;
-
                 if (api != null)
                 {
                     var jsonData = new JSONObject();
-                    jsonData.Add("Junk", "OK !");
                     foreach(KeyValuePair<string, GameObject> dictObject in api.Agents) 
                     {
                         var result = new JSONObject();
@@ -96,33 +91,28 @@ namespace Simulator.Sensors
                             result.Add("angular_velocity", rb.angularVelocity);
                             }
                         }
-                    //     else 
-                    //     {
-                    //         var agent = ped.GetComponent<NavMeshAgent>();
-                    //         var tr = agent.transform;
+                        else 
+                        {
+                            var agent = ped.GetComponent<NavMeshAgent>();
+                            var tr = agent.transform;
 
-                    //         var transform = new JSONObject();
-                    //         transform.Add("position", tr.position);
-                    //         transform.Add("rotation", tr.rotation.eulerAngles);
+                            var transform = new JSONObject();
+                            transform.Add("position", tr.position);
+                            transform.Add("rotation", tr.rotation.eulerAngles);
 
-                    //         result.Add("transform", transform);
-                    //         result.Add("velocity", agent.velocity);
-                    //         result.Add("angular_velocity", Vector3.zero);
-                    //     }
+                            result.Add("transform", transform);
+                            result.Add("velocity", agent.velocity);
+                            result.Add("angular_velocity", Vector3.zero);
+                        }
 
-                    //     // We use UID as the key
-                    //     jsonData.Add(dictObject.Key, result);
+                        // We use UID as the key -> result
+                        jsonData.Add(dictObject.Key, result);
                     }
-
+                    
                     api.AddCustom(transform.parent.gameObject, "npcstatus", jsonData);
                 }
             }
         }
-
-        public void IncreaseTime(){
-            EventTimer += Time.fixedDeltaTime;
-        }
-
 
         public override void OnVisualize(Visualizer visualizer)
         {
